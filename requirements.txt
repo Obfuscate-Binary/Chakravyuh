@@ -6,4 +6,4 @@ aiohttp
 tqdm
 whois
 bs4
-git
+GitPython==0.3.2
