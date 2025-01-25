@@ -1,4 +1,3 @@
-streamlit
 requests
 pandas
 concurrent.futures; python_version < "3.9"
