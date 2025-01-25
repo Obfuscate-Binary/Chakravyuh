@@ -4,3 +4,4 @@ concurrent.futures; python_version < "3.9"
 dnspython
 aiohttp
 tqdm
+whois
