@@ -6,3 +6,4 @@ aiohttp
 tqdm
 whois
 bs4
+git+https://github.com/lc/gau.git
