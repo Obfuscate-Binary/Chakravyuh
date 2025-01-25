@@ -20,6 +20,7 @@ import shutil
 import whois
 import requests
 from bs4 import BeautifulSoup
+import subprocess
 
 # Disable SSL warnings
 requests.packages.urllib3.disable_warnings()
@@ -28,6 +29,11 @@ requests.packages.urllib3.disable_warnings()
 NIKTO_PATH = "/home/vishal/nikto/program/nikto.pl" 
 
 SECURITYTRAILS_API_KEY = "ddiwUR3oESCHlQWwWwc8Ydp81tRH8POh"
+
+
+# Clone a Git repository
+repo_url = "https://github.com/lc/gau.git"
+subprocess.run(["git", "clone", repo_url, "cloned_repo"])
 
 
 def create_directory(path):
