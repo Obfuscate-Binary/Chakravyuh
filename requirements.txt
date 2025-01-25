@@ -1,0 +1,15 @@
+streamlit
+requests
+pandas
+concurrent.futures; python_version < "3.9"
+dnspython
+aiohttp
+ssl
+xml
+tqdm
+multiprocessing
+subprocess
+re
+shutil
+whois
+beautifulsoup4
