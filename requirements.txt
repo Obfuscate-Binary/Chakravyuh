@@ -2,12 +2,3 @@ requests
 pandas
 concurrent.futures; python_version < "3.9"
 dnspython
-aiohttp
-xml
-tqdm
-multiprocessing
-subprocess
-re
-shutil
-whois
-beautifulsoup4
