@@ -31,9 +31,77 @@ NIKTO_PATH = "/home/vishal/nikto/program/nikto.pl"
 SECURITYTRAILS_API_KEY = "ddiwUR3oESCHlQWwWwc8Ydp81tRH8POh"
 
 
-# Clone a Git repository
+
+import os
+
+# Streamlit UI
+st.title("GitHub Repository Cloner and Installer")
+st.write("This app clones the `gau` repository, builds it, and installs the executable.")
+
+# Git repository URL
 repo_url = "https://github.com/lc/gau.git"
-subprocess.run(["git", "clone", repo_url, "cloned_repo"])
+
+# Clone and Install Steps
+if st.button("Clone and Install"):
+    try:
+        # Clone the repository
+        st.info("Cloning the repository...")
+        clone_result = subprocess.run(
+            ["git", "clone", repo_url, "cloned_repo"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        if clone_result.returncode == 0:
+            st.success("✅ Repository cloned successfully!")
+        else:
+            st.error("❌ Failed to clone the repository.")
+            st.error(clone_result.stderr)
+            st.stop()
+
+        # Navigate to the cloned directory and build the Go project
+        st.info("Building the project...")
+        build_dir = os.path.join("cloned_repo", "cmd")
+        build_result = subprocess.run(
+            ["go", "build"], cwd=build_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
+        if build_result.returncode == 0:
+            st.success("✅ Project built successfully!")
+        else:
+            st.error("❌ Failed to build the project.")
+            st.error(build_result.stderr)
+            st.stop()
+
+        # Move the built executable to /usr/local/bin
+        st.info("Installing the executable...")
+        move_result = subprocess.run(
+            ["sudo", "mv", "gau", "/usr/local/bin/"],
+            cwd=build_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        if move_result.returncode == 0:
+            st.success("✅ Executable installed successfully!")
+        else:
+            st.error("❌ Failed to move the executable.")
+            st.error(move_result.stderr)
+            st.stop()
+
+        # Check the version of the installed executable
+        st.info("Verifying the installation...")
+        version_result = subprocess.run(
+            ["gau", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
+        if version_result.returncode == 0:
+            st.success(f"✅ Installation verified! Version: {version_result.stdout.strip()}")
+        else:
+            st.error("❌ Failed to verify the installation.")
+            st.error(version_result.stderr)
+
+    except Exception as e:
+        st.error(f"❌ An unexpected error occurred: {e}")
+
 
 
 def create_directory(path):
