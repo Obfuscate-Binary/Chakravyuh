@@ -38,8 +38,8 @@ import os
 st.title("GitHub Repository Cloner and Installer")
 st.write("This app clones the `gau` repository, builds it, and installs the executable.")
 
-# Git repository URL
-repo_url = "https://github.com/lc/gau.git"
+# # Git repository URL
+# repo_url = "https://github.com/lc/gau.git"
 
 # Clone and Install Steps
 if st.button("Clone and Install"):
